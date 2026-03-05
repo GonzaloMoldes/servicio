@@ -1053,7 +1053,54 @@ window.addEventListener('load', () => {
   offsetCost = (acumuladoParam > 0) ? acumuladoParam : 0;
 
   _startTicker();
+  
+  // ═══════════════════════════════════════
+  // CAPTURAR Y PROPAGAR UTMs
+  // ═══════════════════════════════════════
+  _captureAndPropagateUTMs();
 });
+
+function _captureAndPropagateUTMs() {
+  const params = new URLSearchParams(window.location.search);
+  const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  
+  // Capturar UTMs de la URL actual
+  const currentUTMs = {};
+  utmParams.forEach(param => {
+    const value = params.get(param);
+    if (value) {
+      currentUTMs[param] = value;
+      sessionStorage.setItem(param, value);
+    } else {
+      // Si no viene en URL, intentar recuperar de sessionStorage
+      const stored = sessionStorage.getItem(param);
+      if (stored) currentUTMs[param] = stored;
+    }
+  });
+  
+  // Añadir indicador de que pasó por Reelevo
+  if (!currentUTMs.utm_content) {
+    currentUTMs.utm_content = 'reelevo';
+  } else if (!currentUTMs.utm_content.includes('reelevo')) {
+    currentUTMs.utm_content += '_reelevo';
+  }
+  
+  // Construir query string con UTMs
+  const utmQuery = Object.keys(currentUTMs)
+    .map(key => `${key}=${encodeURIComponent(currentUTMs[key])}`)
+    .join('&');
+  
+  // Añadir UTMs a todos los enlaces relevantes
+  if (utmQuery) {
+    document.querySelectorAll('a[href*="demo.gmvsolutions.es"], a[href*="app.gmvsolutions.es"]').forEach(link => {
+      const url = new URL(link.href);
+      Object.keys(currentUTMs).forEach(key => {
+        url.searchParams.set(key, currentUTMs[key]);
+      });
+      link.href = url.toString();
+    });
+  }
+}
 </script>
 
 <script>

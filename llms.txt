@@ -1,0 +1,34 @@
+# REELEVO — Documentación operativa industrial
+
+> Plataforma SaaS B2B de GMV Solutions. Captura el conocimiento de operarios expertos en vídeo y lo distribuye por QR físico en cada máquina.
+
+## Qué hace
+
+Permite a cualquier sustituto o nueva incorporación operar correctamente desde el primer día escaneando el QR de la máquina, sin usuario ni contraseña. Resuelve la dependencia de perfiles técnicos individuales en pymes industriales.
+
+## Casos de uso
+
+- Cobertura de bajas inesperadas sin parar la línea
+- Incorporación de personal temporal (ETT) sin necesidad del experto presente
+- Onboarding de nuevas incorporaciones
+- Cambios de turno entre compañeros
+- Formación continua en el propio puesto
+
+## Más información
+
+- Producto: https://reelevo.gmvsolutions.es
+- App: https://app.gmvsolutions.es
+- Diagnóstico de riesgo: https://diagnostico.gmvsolutions.es
+- Web GMV Solutions: https://gmvsolutions.es
+```
+
+---
+
+**Repo de `diagnostico.gmvsolutions.es`**
+
+`robots.txt`:
+```
+User-agent: *
+Allow: /
+
+Sitemap: https://diagnostico.gmvsolutions.es/sitemap.xml
